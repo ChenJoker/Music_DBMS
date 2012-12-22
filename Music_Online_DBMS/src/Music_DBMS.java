@@ -5,7 +5,7 @@ public class Music_DBMS {
 
 	/**
 	 * @param args
-	 */
+	 */	
 	//Save user's table
 	public static class User{
 		
@@ -82,6 +82,15 @@ public class Music_DBMS {
 		}
 	}
 	
+	public class Insert_user implements Insert_interface{
+
+		@Override
+		public void insert() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
