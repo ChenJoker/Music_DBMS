@@ -135,44 +135,50 @@ public class Table_node {
 			}
 		}
 		
+		//initial
+		static User user=new User("ABC11","1111","Jeff");
+		static Favorite favorite=new Favorite("ABC11","1");
+		static Music music=new Music("Birth","3","3:46","REAL_WORLD","KOKIA","1");
+		static Album album=new Album("REAL_WORD","300","1");
+		static Singer singer=new Singer("KOKIA","1976/7/22","JAPAN","1");
+		
 		//insert all table
 		public void insert_all_table(){
 			
-			//User's table
-			User user=new User("ABC11","1111","Jeff");
+			//User's table			
 			Insert_user(user,"CAT","2222","Tom");
 			Insert_user(user,"DOG","3333","Mary");
 			Insert_user(user,"BIRD","4444","Sam");
 			Insert_user(user,"TIGER","5555","Nick");
 			
-			//favorite's table
-			Favorite favorite=new Favorite("ABC11","1");
+			//favorite's table			
 			Insert_favorite(favorite,"CAT","2");
 			Insert_favorite(favorite,"DOG","3");
 			Insert_favorite(favorite,"BIRD","4");
 			Insert_favorite(favorite,"TIGER","5");
 			
-			//music's table
-			Music music=new Music("Birth","3","3:46","REAL_WORLD","KOKIA","1");
+			//music's table			
 			Insert_music(music,"Lost Butterfly","3","4:58","Rurutia_02","Rurutia","2");
 			Insert_music(music,"Too Young","4","3:42","C'mon","BZ","3");
 			Insert_music(music,"Fighting Soldier","4","4:53","WILL","«C¤sÂLº¿","4");
 			Insert_music(music,"Cold Wind Blows","5","5:03","Recovery","Eminem","5");
 			
 			//album's table
-			Album album=new Album("REAL_WORD","300","1");
 			Insert_album(album,"Rurutia_02","400","2");
 			Insert_album(album,"C'mon","350","3");
 			Insert_album(album,"WILL","329","4");
 			Insert_album(album,"Recovery","435","5");
 			
-			//singer's table
-			Singer singer=new Singer("KOKIA","1976/7/22","JAPAN","1");
+			//singer's table			
 			Insert_singer(singer,"Rurutia","?/?/?","JAPAN","2");
 			Insert_singer(singer,"BZ","1988/?/?","JAPAN","3");
 			Insert_singer(singer,"«C¤sÂLº¿","1987/10/27","JAPAN","4");
-			Insert_singer(singer,"Eminem","1972/10/17","U.S","5");
+			Insert_singer(singer,"Eminem","1972/10/17","U.S","5");	
 			
+			
+		}
+		
+		public void show(){
 			showtable(user,favorite,music,album,singer);
 		}
 		
