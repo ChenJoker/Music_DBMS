@@ -185,11 +185,11 @@ public class Table_node {
 		public void showtable(User user,Favorite favorite,Music music,Album album,Singer singer){
 			
 			if(user!=null && favorite!=null && music!=null && album!=null && singer!=null){
-				System.out.println(user.ID+" "+user.PASSWORD+" "+user.NICKNAME);
-				System.out.println(favorite.USER_ID+" "+favorite.FAVORITE_NUMBER);
-				System.out.println(music.NAME+" "+music.PRICE+" "+music.TIME_LENGTH+" "+music.ALBUM_NAME+" "+music.SINGER_NAME+" "+music.F_NUMBER);
-				System.out.println(album.NAME+" "+album.PRICE+" "+album.F_NUMBER);
-				System.out.println(singer.NAME+" "+singer.BIRTHDAY+" "+singer.NATION+" "+singer.F_NUMBER);
+				System.out.println(user.ID+"	"+user.PASSWORD+"	"+user.NICKNAME);
+				System.out.println(favorite.USER_ID+"	"+favorite.FAVORITE_NUMBER);
+				System.out.println(music.NAME+"	"+music.PRICE+"	"+music.TIME_LENGTH+"	"+music.ALBUM_NAME+"	"+music.SINGER_NAME+"	"+music.F_NUMBER);
+				System.out.println(album.NAME+"	"+album.PRICE+"	"+album.F_NUMBER);
+				System.out.println(singer.NAME+"	"+singer.BIRTHDAY+"	"+singer.NATION+"	"+singer.F_NUMBER);
 				
 				System.out.println();
 				showtable(user.next,favorite.next,music.next,album.next,singer.next);
