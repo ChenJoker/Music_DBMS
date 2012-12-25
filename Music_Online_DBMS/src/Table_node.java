@@ -20,7 +20,7 @@ public class Table_node {
 		//Save music's table
 		public static class Music{
 			
-			String NAME;
+			String M_NAME;
 			String PRICE;
 			String TIME_LENGTH;
 			String ALBUM_NAME;
@@ -29,7 +29,7 @@ public class Table_node {
 			Music next;
 			
 			public Music(String name,String price,String time_length,String album_name,String singer_name,String f_number){
-				this.NAME=name;
+				this.M_NAME=name;
 				this.PRICE=price;
 				this.TIME_LENGTH=time_length;
 				this.ALBUM_NAME=album_name;
@@ -52,13 +52,13 @@ public class Table_node {
 		
 		//Save Album's table
 		public static class Album{
-			String NAME;
+			String A_NAME;
 			String PRICE;
 			String F_NUMBER;
 			Album next;
 			
 			public Album(String name,String price,String f_number){
-				this.NAME=name;
+				this.A_NAME=name;
 				this.PRICE=price;
 				this.F_NUMBER=f_number;
 			}
@@ -66,14 +66,14 @@ public class Table_node {
 		
 		//Save singer's table
 		public static class Singer{
-			String NAME;
+			String S_NAME;
 			String BIRTHDAY;
 			String NATION;
 			String F_NUMBER;
 			Singer next;
 			
 			public Singer(String name,String birthday, String nation , String f_number){
-				this.NAME=name;
+				this.S_NAME=name;
 				this.NATION=nation;
 				this.F_NUMBER=f_number;
 				this.BIRTHDAY=birthday;
@@ -187,9 +187,9 @@ public class Table_node {
 			if(user!=null && favorite!=null && music!=null && album!=null && singer!=null){
 				System.out.println(user.ID+"	"+user.PASSWORD+"	"+user.NICKNAME);
 				System.out.println(favorite.USER_ID+"	"+favorite.FAVORITE_NUMBER);
-				System.out.println(music.NAME+"	"+music.PRICE+"	"+music.TIME_LENGTH+"	"+music.ALBUM_NAME+"	"+music.SINGER_NAME+"	"+music.F_NUMBER);
-				System.out.println(album.NAME+"	"+album.PRICE+"	"+album.F_NUMBER);
-				System.out.println(singer.NAME+"	"+singer.BIRTHDAY+"	"+singer.NATION+"	"+singer.F_NUMBER);
+				System.out.println(music.M_NAME+"	"+music.PRICE+"	"+music.TIME_LENGTH+"	"+music.ALBUM_NAME+"	"+music.SINGER_NAME+"	"+music.F_NUMBER);
+				System.out.println(album.A_NAME+"	"+album.PRICE+"	"+album.F_NUMBER);
+				System.out.println(singer.S_NAME+"	"+singer.BIRTHDAY+"	"+singer.NATION+"	"+singer.F_NUMBER);
 				
 				System.out.println();
 				showtable(user.next,favorite.next,music.next,album.next,singer.next);
