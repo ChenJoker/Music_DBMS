@@ -8,6 +8,10 @@ public class Music_DBMS {
 		
 		SQL sql=new SQL();
 		sql.CreateTable();
+		
+		while(true){
+			sql.run();
+		}
 	}
 
 }
