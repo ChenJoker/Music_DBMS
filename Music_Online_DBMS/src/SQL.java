@@ -22,7 +22,17 @@ public class SQL {
 		from=input.nextLine();
 		where=input.nextLine();
 		
-		System.out.println(select+"\n"+from+"\n"+where);
+		String [] select_ary=select.split(" ");
+		String [] from_ary=from.split(" ");
+		String [] where_ary=where.split(" ");
+		for(int i=0;i<select_ary.length;i++)
+			System.out.println(select_ary[i]);
+		for(int i=0;i<from_ary.length;i++)
+			System.out.println(from_ary[i]);
+		for(int i=0;i<where_ary.length;i++)
+			System.out.println(where_ary[i]);
+		
+		
 	}
 	public void SELECT(){
 		
