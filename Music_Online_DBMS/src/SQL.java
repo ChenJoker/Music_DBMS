@@ -56,10 +56,23 @@ public class SQL {
 							;
 						else
 							throw new Exception();
-				}
+				}					
 			}
 			catch(Exception e){
 				System.out.println("No attributes in the database");
+				return;
+			}
+			
+			try{
+				for(int i=0;i<from_entity.length;i++){
+					if(from_entity[i].equals("USER") || from_entity[i].equals("MUSIC") || from_entity[i].equals("FAVORITE") || from_entity[i].equals("ALBUM") || from_entity[i].equals("SINGER"))
+						;
+					else
+						throw new Exception();
+				}
+			}
+			catch(Exception e){
+				System.out.println("No entity in the database");
 				return;
 			}
 			for(int i=0;i<select_attributes.length;i++)
