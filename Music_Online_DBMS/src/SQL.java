@@ -8,7 +8,8 @@ public class SQL {
 	private String [] select_ary;
 	private String [] from_ary;
 	private String [] where_ary;
-	
+	private int attribute;
+	private LinkedList table=new LinkedList();
 	
 	public void CreateTable(){
 		Table_node table=new Table_node();
@@ -18,6 +19,8 @@ public class SQL {
 	
 	public void run(){
 		
+		attribute=0;
+		table.removeAll(table);
 		Scanner input=new Scanner(System.in);
 		//Enter commend and test whether there are some errors.
 		try{
@@ -55,6 +58,19 @@ public class SQL {
 							;
 						else
 							throw new Exception();
+						
+						if(select_attributes[j].equals("ID") || select_attributes[j].equals("PASSWORD")|| select_attributes[j].equals("NICKNAME"))
+							attribute=1;
+						else if(select_attributes[j].equals("M_NAME") || select_attributes[j].equals("M_PRICE") || select_attributes[j].equals("TIME_LENGTH") || select_attributes[j].equals("ALBUM_NAME")
+								 || select_attributes[j].equals("SINGER_NAME") || select_attributes[j].equals("F_NUMBER"))
+							attribute=2;
+						else if(select_attributes[j].equals("USER_ID") || select_attributes[j].equals("FAVORITE_NUMBER"))
+							attribute=3;
+						else if(select_attributes[j].equals("A_NAME") || select_attributes[j].equals("A_PRICE") || select_attributes[j].equals("F_NUMBER"))
+							attribute=4;
+						else if( select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
+							attribute=5;
+						
 				}					
 			}
 			catch(Exception e){
@@ -69,6 +85,17 @@ public class SQL {
 						;
 					else
 						throw new Exception();
+					
+					if(from_entity[i].equals("USER"))
+						table.add(1);
+					else if(from_entity[i].equals("MUSIC"))
+						table.add(2);
+					else if(from_entity[i].equals("FAVORITE"))
+						table.add(3);
+					else if(from_entity[i].equals("ALBUM"))
+						table.add(4);
+					else if(from_entity[i].equals("SINGER"))
+						table.add(5);
 				}
 			}
 			catch(Exception e){
@@ -76,7 +103,7 @@ public class SQL {
 				return;
 			}
 			
-			
+			//test
 			for(int i=0;i<select_attributes.length;i++)
 				System.out.println(select_attributes[i]);
 			for(int i=0;i<from_entity.length;i++)
@@ -89,7 +116,10 @@ public class SQL {
 			return;
 		}		
 		System.out.println(select_ary[0].charAt(0));
+		System.out.println(attribute);
+		System.out.println(table);
 	}
+	
 	public void analyze(){
 		
 	}
