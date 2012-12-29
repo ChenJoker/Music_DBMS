@@ -10,6 +10,8 @@ public class SQL {
 	private String [] where_ary;
 	private int attribute;
 	private LinkedList table=new LinkedList();
+	private int conditions_number;
+	
 	
 	public void CreateTable(){
 		Table_node table=new Table_node();
@@ -19,6 +21,7 @@ public class SQL {
 	
 	public void run(){
 		
+		conditions_number=1;
 		attribute=0;
 		table.removeAll(table);
 		Scanner input=new Scanner(System.in);
@@ -70,6 +73,8 @@ public class SQL {
 							attribute=4;
 						else if( select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
 							attribute=5;
+						else if(select_attributes[j].equals("*"))
+							attribute=6;
 						
 				}					
 			}
@@ -103,24 +108,56 @@ public class SQL {
 				return;
 			}
 			
-			//test
-			for(int i=0;i<select_attributes.length;i++)
-				System.out.println(select_attributes[i]);
-			for(int i=0;i<from_entity.length;i++)
-				System.out.println(from_entity[i]);
-			for(int i=1;i<where_ary.length;i++)
-				System.out.println(where_ary[i]);
+			
+			try{
+				//check whether the attributes are in entity user enters
+				for(int i=0;i<table.size();i++){
+					if(table.get(i).equals(attribute) || attribute==6)
+						break;
+					else
+						throw new Exception();
+				}
+			}
+			catch(Exception e){
+				System.out.println("The attributes are not in entities your enter");
+				return;
+			}
 		}
 		catch(Exception e){
 			System.out.println("Please enter correct commend");
 			return;
 		}		
-		System.out.println(select_ary[0].charAt(0));
-		System.out.println(attribute);
-		System.out.println(table);
+		
+		analyze();
 	}
 	
 	public void analyze(){
 		
+		String [] condition = null;
+		 
+		
+		for(int i=1;i<where_ary.length;i++){
+			if(where_ary[i].toUpperCase().equals("AND"))
+				conditions_number++;
+		}
+		
+		for(int i=1;i<where_ary.length;i++){
+			condition=where_ary[i].split("=");
+			
+			for(int j=0;j<condition.length;j++){
+				
+				for(int K=0;K<table.size();K++){
+					if(table.get(K).equals(1)){
+					
+					}
+				}
+			}
+		}
+		
+		
 	}
 }
+
+
+
+
