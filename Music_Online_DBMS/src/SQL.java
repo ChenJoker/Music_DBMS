@@ -8,13 +8,16 @@ public class SQL {
 	private String [] select_ary;
 	private String [] from_ary;
 	private String [] where_ary;
+	private String [] select_attributes;
+	private String [] from_entity;
 	private int attribute;
-	private LinkedList table=new LinkedList();
+	private LinkedList entity=new LinkedList();
 	private int conditions_number;
 	
+	Table_node table=new Table_node();
 	
 	public void CreateTable(){
-		Table_node table=new Table_node();
+		
 		table.insert_all_table();
 	//	table.show();
 	}
@@ -23,7 +26,7 @@ public class SQL {
 		
 		conditions_number=1;
 		attribute=0;
-		table.removeAll(table);
+		entity.removeAll(entity);
 		Scanner input=new Scanner(System.in);
 		//Enter commend and test whether there are some errors.
 		try{
@@ -37,8 +40,8 @@ public class SQL {
 			where_ary=where.split(" ");
 		
 			//split attributes , entity
-			String [] select_attributes=select_ary[1].split(",");
-			String [] from_entity=from_ary[1].split(",");
+			 select_attributes=select_ary[1].split(",");
+			 from_entity=from_ary[1].split(",");
 			
 			//check whether user enters correct commend
 			if(!select_ary[0].toUpperCase().equals("SELECT"))
@@ -92,15 +95,15 @@ public class SQL {
 						throw new Exception();
 					
 					if(from_entity[i].equals("USER"))
-						table.add(1);
+						entity.add(1);
 					else if(from_entity[i].equals("MUSIC"))
-						table.add(2);
+						entity.add(2);
 					else if(from_entity[i].equals("FAVORITE"))
-						table.add(3);
+						entity.add(3);
 					else if(from_entity[i].equals("ALBUM"))
-						table.add(4);
+						entity.add(4);
 					else if(from_entity[i].equals("SINGER"))
-						table.add(5);
+						entity.add(5);
 				}
 			}
 			catch(Exception e){
@@ -111,15 +114,15 @@ public class SQL {
 			
 			try{
 				//check whether the attributes are in entity user enters
-				for(int i=0;i<table.size();i++){
-					if(table.get(i).equals(attribute) || attribute==6)
+				for(int i=0;i<entity.size();i++){
+					if(entity.get(i).equals(attribute) || attribute==6)
 						break;
 					else
 						throw new Exception();
 				}
 			}
 			catch(Exception e){
-				System.out.println("The attributes are not in entities your enter");
+				System.out.println("The attributes are not in entities you enter");
 				return;
 			}
 		}
@@ -134,8 +137,14 @@ public class SQL {
 	public void analyze(){
 		
 		String [] condition = null;
-		 
 		
+		/*
+		System.out.println(table.user.ID);
+		
+		table.user=table.user.next;
+	
+		System.out.println(table.user.ID);
+		*/
 		for(int i=1;i<where_ary.length;i++){
 			if(where_ary[i].toUpperCase().equals("AND"))
 				conditions_number++;
@@ -144,14 +153,12 @@ public class SQL {
 		for(int i=1;i<where_ary.length;i++){
 			condition=where_ary[i].split("=");
 			
-			for(int j=0;j<condition.length;j++){
-				
-				for(int K=0;K<table.size();K++){
-					if(table.get(K).equals(1)){
+			for(int K=0;K<entity.size();K++){
+				if(entity.get(K).equals(1)){
 					
-					}
 				}
 			}
+			
 		}
 		
 		
