@@ -137,31 +137,46 @@ public class SQL {
 	public void analyze(){
 		
 		String [] condition = null;
+		String sub;
 		
 		/*
 		System.out.println(table.user.ID);
 		
 		table.user=table.user.next;
-	
-		System.out.println(table.user.ID);
-		*/
+	*/
 		for(int i=1;i<where_ary.length;i++){
 			if(where_ary[i].toUpperCase().equals("AND"))
 				conditions_number++;
 		}
+		
 		
 		for(int i=1;i<where_ary.length;i++){
 			condition=where_ary[i].split("=");
 			
 			for(int K=0;K<entity.size();K++){
 				if(entity.get(K).equals(1)){
+					do{
+						if(condition[0].equals("ID") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.user.ID.equals(sub)){
+								for(int j=0;j<select_attributes.length;j++){
+									if(select_attributes[j].equals("ID"))
+										System.out.print(table.user.ID+" ");
+									if(select_attributes[j].equals("PASSWORD"))
+										System.out.print(table.user.PASSWORD+" ");
+									if(select_attributes[j].equals("NICKNAME"))
+										System.out.print(table.user.NICKNAME+" ");
+								}
+							}	
+						}
+						System.out.println();
+						table.user=table.user.next;
+					}while(table.user.next!=null);
 					
 				}
 			}
 			
 		}
-		
-		
 	}
 }
 
