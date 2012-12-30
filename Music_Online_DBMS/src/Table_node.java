@@ -8,7 +8,7 @@ public class Table_node {
 			String PASSWORD;
 			String NICKNAME;
 			User next;
-			
+			User pro;
 			public User(String id,String password , String nickname){
 					this.ID=id;
 					this.NICKNAME=nickname;
@@ -27,7 +27,7 @@ public class Table_node {
 			String SINGER_NAME;
 			String F_NUMBER;
 			Music next;
-			
+			Music pro;
 			public Music(String name,String price,String time_length,String album_name,String singer_name,String f_number){
 				this.M_NAME=name;
 				this.M_PRICE=price;
@@ -43,7 +43,7 @@ public class Table_node {
 			String USER_ID;
 			String FAVORITE_NUMBER;
 			Favorite next;
-			
+			Favorite pro;
 			public Favorite(String user_id,String favorite_number){
 				this.USER_ID=user_id;
 				this.FAVORITE_NUMBER=favorite_number;
@@ -56,7 +56,7 @@ public class Table_node {
 			String A_PRICE;
 			String F_NUMBER;
 			Album next;
-			
+			Album pro;
 			public Album(String name,String price,String f_number){
 				this.A_NAME=name;
 				this.A_PRICE=price;
@@ -71,7 +71,7 @@ public class Table_node {
 			String NATION;
 			String F_NUMBER;
 			Singer next;
-			
+			Singer pro;
 			public Singer(String name,String birthday, String nation , String f_number){
 				this.S_NAME=name;
 				this.NATION=nation;
@@ -88,6 +88,7 @@ public class Table_node {
 			}
 			else{
 				user.next=new User(id,password,nickname);
+				user.next.pro=user;
 			}
 		}
 		
@@ -99,6 +100,7 @@ public class Table_node {
 			}			
 			else{
 				favorite.next=new Favorite(user_id,favorite_number);
+				favorite.next.pro=favorite;
 			}
 		}
 		
@@ -110,6 +112,7 @@ public class Table_node {
 			}		
 			else{
 				music.next=new Music(name,price,time_length,album_name,singer_name,f_number);
+				music.next.pro=music;
 			}
 		}
 		
@@ -121,6 +124,7 @@ public class Table_node {
 			}
 			else{
 				album.next=new Album(name,price,f_number);
+				album.next.pro=album;
 			}
 		}
 		
@@ -132,6 +136,7 @@ public class Table_node {
 			}
 			else{
 				singer.next=new Singer(name,birthday,nation,f_number);
+				singer.next.pro=singer;
 			}
 		}
 		

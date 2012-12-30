@@ -158,24 +158,66 @@ public class SQL {
 					do{
 						if(condition[0].equals("ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.user.ID.equals(sub)){
-								for(int j=0;j<select_attributes.length;j++){
-									if(select_attributes[j].equals("ID"))
-										System.out.print(table.user.ID+" ");
-									if(select_attributes[j].equals("PASSWORD"))
-										System.out.print(table.user.PASSWORD+" ");
-									if(select_attributes[j].equals("NICKNAME"))
-										System.out.print(table.user.NICKNAME+" ");
-								}
+							if(table.user.ID.equals(sub)){							
+								UserPrint();
+								System.out.println();
 							}	
 						}
-						System.out.println();
+						if(condition[0].equals("PASSWORD") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.user.PASSWORD.equals(sub)){							
+								UserPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("NICKNAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.user.NICKNAME.equals(sub)){							
+								UserPrint();
+								System.out.println();
+							}	
+						}
 						table.user=table.user.next;
 					}while(table.user.next!=null);
 					
 				}
 			}
 			
+		}
+		TableInitial();
+	}
+	
+	//let table start at root so that this system can find attribute all time.
+	public void TableInitial(){
+		do{
+			table.user=table.user.pro;
+		}while(table.user.pro!=null);
+		/*
+		do{
+			table.music=table.music.pro;
+		}while(table.music.pro!=null);
+		
+		do{
+			table.favorite=table.favorite.pro;
+		}while(table.favorite.pro!=null);
+		
+		do{
+			table.album=table.album.pro;
+		}while(table.album.pro!=null);
+		
+		do{
+			table.singer=table.singer.pro;
+		}while(table.singer.pro!=null);*/
+	}
+	
+	public void UserPrint(){
+		for(int j=0;j<select_attributes.length;j++){
+			if(select_attributes[j].equals("ID"))
+				System.out.print(table.user.ID+" ");
+			if(select_attributes[j].equals("PASSWORD"))
+				System.out.print(table.user.PASSWORD+" ");
+			if(select_attributes[j].equals("NICKNAME"))
+				System.out.print(table.user.NICKNAME+" ");
 		}
 	}
 }
