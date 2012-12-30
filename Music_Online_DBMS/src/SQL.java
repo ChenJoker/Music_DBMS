@@ -155,7 +155,7 @@ public class SQL {
 			
 			for(int K=0;K<entity.size();K++){
 				if(entity.get(K).equals(1)){
-					do{
+					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.user.ID.equals(sub)){							
@@ -177,12 +177,13 @@ public class SQL {
 								System.out.println();
 							}	
 						}
-						table.user=table.user.next;
-					}while(table.user.next!=null);
+						if(table.user.next!=null)
+							table.user=table.user.next;
+					}
 					
 				}
 				else if(entity.get(K).equals(2)){
-					do{
+					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("M_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.M_NAME.equals(sub)){							
@@ -206,7 +207,7 @@ public class SQL {
 						}
 						if(condition[0].equals("ALBUM_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.ALBUM_NAME.equals(sub)){							
+							if(table.music.ALBUM_NAME.equals(sub)){		
 								MusicPrint();
 								System.out.println();
 							}	
@@ -225,11 +226,12 @@ public class SQL {
 								System.out.println();
 							}	
 						}
-						table.music=table.music.next;
-					}while(table.music.next!=null);					
+						if(table.music.next!=null)
+							table.music=table.music.next;
+					}				
 				}
 				else if(entity.get(K).equals(3)){
-					do{
+					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("USER_ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.favorite.USER_ID.equals(sub)){							
@@ -244,11 +246,12 @@ public class SQL {
 								System.out.println();
 							}	
 						}
-						table.favorite=table.favorite.next;
-					}while(table.favorite.next!=null);					
+						if(table.favorite.next!=null)
+							table.favorite=table.favorite.next;
+					}				
 				}
 				else if(entity.get(K).equals(4)){
-					do{
+					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("A_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.album.A_NAME.equals(sub)){							
@@ -270,11 +273,12 @@ public class SQL {
 								System.out.println();
 							}	
 						}
-						table.album=table.album.next;
-					}while(table.album.next!=null);					
+						if(table.album.next!=null)
+							table.album=table.album.next;
+					}				
 				}
 				else if(entity.get(K).equals(5)){
-					do{
+					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("S_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.singer.S_NAME.equals(sub)){							
@@ -303,8 +307,9 @@ public class SQL {
 								System.out.println();
 							}	
 						}
-						table.singer=table.singer.next;
-					}while(table.singer.next!=null);
+						if(table.singer.next!=null)
+							table.singer=table.singer.next;
+					}
 					
 				}
 			}

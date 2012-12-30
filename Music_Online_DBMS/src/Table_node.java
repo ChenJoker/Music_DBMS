@@ -1,6 +1,7 @@
 
 public class Table_node {
 	
+		public int Table_number=1;
 		//Save user's table
 		public static class User{
 			
@@ -87,6 +88,7 @@ public class Table_node {
 				Insert_user(user.next,id,password,nickname);
 			}
 			else{
+				Table_number++;
 				user.next=new User(id,password,nickname);
 				user.next.pro=user;
 			}
@@ -163,10 +165,10 @@ public class Table_node {
 			Insert_favorite(favorite,"TIGER","5");
 			
 			//music's table			
-			Insert_music(music,"Lost Butterfly","3","4:58","Rurutia_02","Rurutia","2");
-			Insert_music(music,"Too Young","4","3:42","C'mon","BZ","3");
-			Insert_music(music,"Fighting Soldier","4","4:53","WILL","«C¤sÂLº¿","4");
-			Insert_music(music,"Cold Wind Blows","5","5:03","Recovery","Eminem","5");
+			Insert_music(music,"Lost_Butterfly","3","4:58","Rurutia_02","Rurutia","2");
+			Insert_music(music,"Too_Young","4","3:42","C'mon","BZ","3");
+			Insert_music(music,"Fighting_Soldier","4","4:53","WILL","«C¤sÂLº¿","4");
+			Insert_music(music,"Cold_Wind_Blows","5","5:03","Recovery","Eminem","5");
 			
 			//album's table
 			Insert_album(album,"Rurutia_02","400","2");
