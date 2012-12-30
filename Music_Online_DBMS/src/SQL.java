@@ -181,6 +181,132 @@ public class SQL {
 					}while(table.user.next!=null);
 					
 				}
+				else if(entity.get(K).equals(2)){
+					do{
+						if(condition[0].equals("M_NAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.M_NAME.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("M_PRICE") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.M_PRICE.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("TIME_LENGTH") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.TIME_LENGTH.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("ALBUM_NAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.ALBUM_NAME.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("SINGER_NAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.SINGER_NAME.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.music.F_NUMBER.equals(sub)){							
+								MusicPrint();
+								System.out.println();
+							}	
+						}
+						table.music=table.music.next;
+					}while(table.music.next!=null);					
+				}
+				else if(entity.get(K).equals(3)){
+					do{
+						if(condition[0].equals("USER_ID") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.favorite.USER_ID.equals(sub)){							
+								FavoritePrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("FAVORITE_NUMBER") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.favorite.FAVORITE_NUMBER.equals(sub)){							
+								FavoritePrint();
+								System.out.println();
+							}	
+						}
+						table.favorite=table.favorite.next;
+					}while(table.favorite.next!=null);					
+				}
+				else if(entity.get(K).equals(4)){
+					do{
+						if(condition[0].equals("A_NAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.album.A_NAME.equals(sub)){							
+								AlbumPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("A_PRICE") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.album.A_PRICE.equals(sub)){							
+								AlbumPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.album.F_NUMBER.equals(sub)){							
+								AlbumPrint();
+								System.out.println();
+							}	
+						}
+						table.album=table.album.next;
+					}while(table.album.next!=null);					
+				}
+				else if(entity.get(K).equals(5)){
+					do{
+						if(condition[0].equals("S_NAME") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.singer.S_NAME.equals(sub)){							
+								SingerPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("BIRTHDAY") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.singer.BIRTHDAY.equals(sub)){							
+								SingerPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("NATION") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.singer.NATION.equals(sub)){							
+								SingerPrint();
+								System.out.println();
+							}	
+						}
+						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
+							sub=condition[1].substring(1, condition[1].length()-1);
+							if(table.singer.F_NUMBER.equals(sub)){							
+								SingerPrint();
+								System.out.println();
+							}	
+						}
+						table.singer=table.singer.next;
+					}while(table.singer.next!=null);
+					
+				}
 			}
 			
 		}
@@ -189,27 +315,24 @@ public class SQL {
 	
 	//let table start at root so that this system can find attribute all time.
 	public void TableInitial(){
-		do{
+		
+		while(table.user.pro!=null)
 			table.user=table.user.pro;
-		}while(table.user.pro!=null);
-		/*
-		do{
+				
+		while(table.music.pro!=null)
 			table.music=table.music.pro;
-		}while(table.music.pro!=null);
-		
-		do{
+				
+		while(table.favorite.pro!=null)
 			table.favorite=table.favorite.pro;
-		}while(table.favorite.pro!=null);
-		
-		do{
+				
+		while(table.album.pro!=null)
 			table.album=table.album.pro;
-		}while(table.album.pro!=null);
-		
-		do{
-			table.singer=table.singer.pro;
-		}while(table.singer.pro!=null);*/
+				
+		while(table.singer.pro!=null)
+			table.singer=table.singer.pro;		
 	}
 	
+	//print user's attributes
 	public void UserPrint(){
 		for(int j=0;j<select_attributes.length;j++){
 			if(select_attributes[j].equals("ID"))
@@ -218,6 +341,70 @@ public class SQL {
 				System.out.print(table.user.PASSWORD+" ");
 			if(select_attributes[j].equals("NICKNAME"))
 				System.out.print(table.user.NICKNAME+" ");
+			if(select_attributes[j].equals("*"))
+				System.out.print(table.user.ID+" "+table.user.PASSWORD+" "+table.user.NICKNAME+" ");
+		}
+	}
+	
+	//print music's attributes
+	public void MusicPrint(){
+		for(int j=0;j<select_attributes.length;j++){
+			if(select_attributes[j].equals("M_NAME"))
+				System.out.print(table.music.M_NAME+" ");
+			if(select_attributes[j].equals("M_PRICE"))
+				System.out.print(table.music.M_PRICE+" ");
+			if(select_attributes[j].equals("TIME_LENGTH"))
+				System.out.print(table.music.TIME_LENGTH+" ");
+			if(select_attributes[j].equals("ALBUM_NAME"))
+				System.out.print(table.music.ALBUM_NAME+" ");
+			if(select_attributes[j].equals("SINGER_NAME"))
+				System.out.print(table.music.SINGER_NAME+" ");
+			if(select_attributes[j].equals("F_NUMBER"))
+				System.out.print(table.music.F_NUMBER+" ");
+			if(select_attributes[j].equals("*"))
+				System.out.print(table.music.M_NAME+" "+table.music.M_PRICE+" "+table.music.TIME_LENGTH+" "+table.music.ALBUM_NAME+" "+table.music.SINGER_NAME+" "+table.music.F_NUMBER+" ");
+		}
+	}
+	
+	//print favorite's attributes
+	public void FavoritePrint(){
+		for(int j=0;j<select_attributes.length;j++){
+			if(select_attributes[j].equals("USER_ID"))
+				System.out.print(table.favorite.USER_ID+" ");
+			if(select_attributes[j].equals("FAVORITE_NUMBER"))
+				System.out.print(table.favorite.FAVORITE_NUMBER+" ");
+			if(select_attributes[j].equals("*"))
+				System.out.print(table.favorite.USER_ID+" "+table.favorite.FAVORITE_NUMBER+" ");
+		}
+	}
+	
+	//print album's attributes
+	public void AlbumPrint(){
+		for(int j=0;j<select_attributes.length;j++){
+			if(select_attributes[j].equals("A_NAME"))
+				System.out.print(table.album.A_NAME+" ");
+			if(select_attributes[j].equals("A_PRICE"))
+				System.out.print(table.album.A_PRICE+" ");
+			if(select_attributes[j].equals("F_NUMBER"))
+				System.out.print(table.album.F_NUMBER+" ");
+			if(select_attributes[j].equals("*"))
+				System.out.print(table.album.A_NAME+" "+table.album.A_PRICE+" "+table.album.F_NUMBER+" ");
+		}
+	}
+	
+	//print singer's attributes
+	public void SingerPrint(){
+		for(int j=0;j<select_attributes.length;j++){
+			if(select_attributes[j].equals("S_NAME"))
+				System.out.print(table.singer.S_NAME+" ");
+			if(select_attributes[j].equals("BIRTHDAY"))
+				System.out.print(table.singer.BIRTHDAY+" ");
+			if(select_attributes[j].equals("NATION"))
+				System.out.print(table.singer.NATION+" ");
+			if(select_attributes[j].equals("F_NUMBER"))
+				System.out.print(table.singer.F_NUMBER+" ");
+			if(select_attributes[j].equals("*"))
+				System.out.print(table.singer.S_NAME+" "+table.singer.BIRTHDAY+" "+table.singer.NATION+" "+table.singer.F_NUMBER+" ");
 		}
 	}
 }
