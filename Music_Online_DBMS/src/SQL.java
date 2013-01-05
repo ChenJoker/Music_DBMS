@@ -14,8 +14,10 @@ public class SQL {
 	private LinkedList entity=new LinkedList();
 	private int conditions_number;
 	private String [] aggregate;
-	private int special;
-	
+	private boolean special;
+	private double number;
+	private double sum;
+	private double avg;
 	Table_node table=new Table_node();
 	
 	public void CreateTable(){
@@ -26,7 +28,10 @@ public class SQL {
 	
 	public void run(){
 		
-		special=1;
+		number=0;
+		avg=0.0;
+		special=true;
+		sum=0.0;
 		conditions_number=1;
 		attribute=0;
 		entity.removeAll(entity);
@@ -51,7 +56,7 @@ public class SQL {
 			//check whether user enters correct commend
 			if(aggregate[0].toUpperCase().equals("MAX") || aggregate[0].toUpperCase().equals("MIN") || aggregate[0].toUpperCase().equals("AVG")
 					|| aggregate[0].toUpperCase().equals("SUM") || aggregate[0].toUpperCase().equals("COUNT"))
-				special=2;
+				special=false;
 			if(!select_ary[0].toUpperCase().equals("SELECT"))
 				throw new Exception();
 			if(!from_ary[0].toUpperCase().equals("FROM"))
@@ -60,7 +65,7 @@ public class SQL {
 				throw new Exception();
 			
 			try{
-				if(special==1){
+				if(special){
 					for(int j=0;j<select_attributes.length;j++){
 		
 							//check whether attributes which user enters are correct
@@ -197,16 +202,29 @@ public class SQL {
 						if(condition[0].equals("ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.user.ID.equals(sub)){			
-								if(special==1){
+								if(special){
 									UserPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")){
+											sum+=Double.parseDouble(table.user.PASSWORD);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")){
+											avg+=Double.parseDouble(table.user.PASSWORD);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("PASSWORD") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.user.PASSWORD.equals(sub)){
-								if(special==1){
+								if(special){
 									UserPrint();
 									System.out.println();
 								}
@@ -215,7 +233,7 @@ public class SQL {
 						if(condition[0].equals("NICKNAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.user.NICKNAME.equals(sub)){
-								if(special==1){
+								if(special){
 									UserPrint();
 									System.out.println();
 								}
@@ -231,54 +249,132 @@ public class SQL {
 						if(condition[0].equals("M_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.M_NAME.equals(sub)){	
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("M_PRICE") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.M_PRICE.equals(sub)){
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("TIME_LENGTH") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.TIME_LENGTH.equals(sub)){
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("ALBUM_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.ALBUM_NAME.equals(sub)){	
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("SINGER_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.SINGER_NAME.equals(sub)){
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.music.F_NUMBER.equals(sub)){
-								if(special==1){
+								if(special){
 									MusicPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											sum+=Double.parseDouble(table.music.M_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -291,16 +387,17 @@ public class SQL {
 						if(condition[0].equals("USER_ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.favorite.USER_ID.equals(sub)){	
-								if(special==1){
+								if(special){
 									FavoritePrint();
 									System.out.println();
 								}
+								
 							}	
 						}
 						if(condition[0].equals("FAVORITE_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.favorite.FAVORITE_NUMBER.equals(sub)){	
-								if(special==1){
+								if(special){
 									FavoritePrint();
 									System.out.println();
 								}
@@ -315,27 +412,67 @@ public class SQL {
 						if(condition[0].equals("A_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.album.A_NAME.equals(sub)){
-								if(special==1){
+								if(special){
 									AlbumPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											sum+=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											avg+=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("A_PRICE") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.album.A_PRICE.equals(sub)){
-								if(special==1){
+								if(special){
 									AlbumPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											sum+=Double.parseDouble(table.album.A_PRICE);
+										}
+										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											avg+=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
 								}
 							}	
 						}
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.album.F_NUMBER.equals(sub)){	
-								if(special==1){
+								if(special){
 									AlbumPrint();
 									System.out.println();
+								}
+								else{
+									if(aggregate[0].toUpperCase().equals("SUM")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											sum+=Double.parseDouble(table.album.A_PRICE);
+										}										
+									}
+									else if(aggregate[0].toUpperCase().equals("AVG")){
+										number++;
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											avg+=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -348,7 +485,7 @@ public class SQL {
 						if(condition[0].equals("S_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.singer.S_NAME.equals(sub)){
-								if(special==1){
+								if(special){
 									SingerPrint();
 									System.out.println();
 								}
@@ -357,7 +494,7 @@ public class SQL {
 						if(condition[0].equals("BIRTHDAY") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.singer.BIRTHDAY.equals(sub)){	
-								if(special==1){
+								if(special){
 									SingerPrint();
 									System.out.println();
 								}
@@ -366,7 +503,7 @@ public class SQL {
 						if(condition[0].equals("NATION") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.singer.NATION.equals(sub)){	
-								if(special==1){
+								if(special){
 									SingerPrint();
 									System.out.println();
 								}
@@ -375,7 +512,7 @@ public class SQL {
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
 							if(table.singer.F_NUMBER.equals(sub)){
-								if(special==1){
+								if(special){
 									SingerPrint();
 									System.out.println();
 								}
@@ -389,6 +526,10 @@ public class SQL {
 			}
 			
 		}
+		if(aggregate[0].toUpperCase().equals("SUM"))	
+			System.out.println(sum);
+		else if(aggregate[0].toUpperCase().equals("AVG"))	
+			System.out.println(avg/number);
 		TableInitial();
 	}
 	
