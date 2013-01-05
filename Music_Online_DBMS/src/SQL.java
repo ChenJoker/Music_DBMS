@@ -18,6 +18,8 @@ public class SQL {
 	private double number;
 	private double sum;
 	private double avg;
+	private double max;
+	private double min;
 	private boolean count;
 	Table_node table=new Table_node();
 	
@@ -29,6 +31,8 @@ public class SQL {
 	
 	public void run(){
 		
+		max=0;
+		min=9999;
 		number=0;
 		avg=0.0;
 		special=true;
@@ -214,19 +218,6 @@ public class SQL {
 									UserPrint();
 									System.out.println();
 								}
-								else{
-									if(aggregate[0].toUpperCase().equals("SUM")){
-										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")){
-											sum+=Double.parseDouble(table.user.PASSWORD);
-										}
-									}
-									else if(aggregate[0].toUpperCase().equals("AVG")){
-										number++;
-										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")){
-											avg+=Double.parseDouble(table.user.PASSWORD);
-										}
-									}
-								}
 							}	
 						}
 						if(condition[0].equals("PASSWORD") && condition[1].charAt(0)=='\"'){
@@ -273,6 +264,18 @@ public class SQL {
 											avg+=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -293,6 +296,18 @@ public class SQL {
 										number++;
 										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
 											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
 								}
@@ -317,6 +332,18 @@ public class SQL {
 											avg+=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -337,6 +364,18 @@ public class SQL {
 										number++;
 										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
 											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
 								}
@@ -361,6 +400,18 @@ public class SQL {
 											avg+=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -381,6 +432,18 @@ public class SQL {
 										number++;
 										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
 											avg+=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)>max)
+												max=Double.parseDouble(table.music.M_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE")){
+											if(Double.parseDouble(table.music.M_PRICE)<min)
+												min=Double.parseDouble(table.music.M_PRICE);
 										}
 									}
 								}
@@ -436,6 +499,18 @@ public class SQL {
 											avg+=Double.parseDouble(table.album.A_PRICE);
 										}
 									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)>max)
+												max=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)<min)
+												min=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -459,6 +534,18 @@ public class SQL {
 											avg+=Double.parseDouble(table.album.A_PRICE);
 										}
 									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)>max)
+												max=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)<min)
+												min=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
 								}
 							}	
 						}
@@ -479,6 +566,18 @@ public class SQL {
 										number++;
 										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
 											avg+=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MAX")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)>max)
+												max=Double.parseDouble(table.album.A_PRICE);
+										}
+									}
+									else if(aggregate[0].toUpperCase().equals("MIN")){
+										if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE")){
+											if(Double.parseDouble(table.album.A_PRICE)<min)
+												min=Double.parseDouble(table.album.A_PRICE);
 										}
 									}
 								}
@@ -540,6 +639,10 @@ public class SQL {
 			System.out.println(avg/number);
 		else if(aggregate[0].toUpperCase().equals("COUNT"))
 			System.out.println(table.Table_number);
+		else if(aggregate[0].toUpperCase().equals("MAX"))	
+			System.out.println(max);
+		else if(aggregate[0].toUpperCase().equals("MIN"))	
+			System.out.println(min);
 		TableInitial();
 	}
 	
