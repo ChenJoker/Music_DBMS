@@ -13,6 +13,8 @@ public class SQL {
 	private int attribute;
 	private LinkedList entity=new LinkedList();
 	private int conditions_number;
+	private String [] aggregate;
+	private int special;
 	
 	Table_node table=new Table_node();
 	
@@ -24,6 +26,7 @@ public class SQL {
 	
 	public void run(){
 		
+		special=1;
 		conditions_number=1;
 		attribute=0;
 		entity.removeAll(entity);
@@ -40,10 +43,15 @@ public class SQL {
 			where_ary=where.split(" ");
 		
 			//split attributes , entity
+	
 			 select_attributes=select_ary[1].split(",");
+			 aggregate=select_ary[1].split("\\(");
 			 from_entity=from_ary[1].split(",");
-			
+			 
 			//check whether user enters correct commend
+			if(aggregate[0].toUpperCase().equals("MAX") || aggregate[0].toUpperCase().equals("MIN") || aggregate[0].toUpperCase().equals("AVG")
+					|| aggregate[0].toUpperCase().equals("SUM") || aggregate[0].toUpperCase().equals("COUNT"))
+				special=2;
 			if(!select_ary[0].toUpperCase().equals("SELECT"))
 				throw new Exception();
 			if(!from_ary[0].toUpperCase().equals("FROM"))
@@ -52,34 +60,64 @@ public class SQL {
 				throw new Exception();
 			
 			try{
-				for(int j=0;j<select_attributes.length;j++){
-	
-						//check whether attributes which user enters are correct
-						if(select_attributes[j].equals("ID") || select_attributes[j].equals("PASSWORD")|| select_attributes[j].equals("NICKNAME")
-								|| select_attributes[j].equals("M_NAME") || select_attributes[j].equals("M_PRICE") || select_attributes[j].equals("TIME_LENGTH") || select_attributes[j].equals("ALBUM_NAME")
-								 || select_attributes[j].equals("SINGER_NAME") || select_attributes[j].equals("F_NUMBER") || select_attributes[j].equals("*")
-								 || select_attributes[j].equals("USER_ID") || select_attributes[j].equals("FAVORITE_NUMBER")
-								 || select_attributes[j].equals("A_NAME") || select_attributes[j].equals("A_PRICE") || select_attributes[j].equals("F_NUMBER")
-								 || select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
-							;
-						else
-							throw new Exception();
-						
-						if(select_attributes[j].equals("ID") || select_attributes[j].equals("PASSWORD")|| select_attributes[j].equals("NICKNAME"))
-							attribute=1;
-						else if(select_attributes[j].equals("M_NAME") || select_attributes[j].equals("M_PRICE") || select_attributes[j].equals("TIME_LENGTH") || select_attributes[j].equals("ALBUM_NAME")
-								 || select_attributes[j].equals("SINGER_NAME") || select_attributes[j].equals("F_NUMBER"))
-							attribute=2;
-						else if(select_attributes[j].equals("USER_ID") || select_attributes[j].equals("FAVORITE_NUMBER"))
-							attribute=3;
-						else if(select_attributes[j].equals("A_NAME") || select_attributes[j].equals("A_PRICE") || select_attributes[j].equals("F_NUMBER"))
-							attribute=4;
-						else if( select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
-							attribute=5;
-						else if(select_attributes[j].equals("*"))
-							attribute=6;
-						
-				}					
+				if(special==1){
+					for(int j=0;j<select_attributes.length;j++){
+		
+							//check whether attributes which user enters are correct
+							if(select_attributes[j].equals("ID") || select_attributes[j].equals("PASSWORD")|| select_attributes[j].equals("NICKNAME")
+									|| select_attributes[j].equals("M_NAME") || select_attributes[j].equals("M_PRICE") || select_attributes[j].equals("TIME_LENGTH") || select_attributes[j].equals("ALBUM_NAME")
+									 || select_attributes[j].equals("SINGER_NAME") || select_attributes[j].equals("F_NUMBER") || select_attributes[j].equals("*")
+									 || select_attributes[j].equals("USER_ID") || select_attributes[j].equals("FAVORITE_NUMBER")
+									 || select_attributes[j].equals("A_NAME") || select_attributes[j].equals("A_PRICE") || select_attributes[j].equals("F_NUMBER")
+									 || select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
+								;
+							else
+								throw new Exception();
+							
+							if(select_attributes[j].equals("ID") || select_attributes[j].equals("PASSWORD")|| select_attributes[j].equals("NICKNAME"))
+								attribute=1;
+							else if(select_attributes[j].equals("M_NAME") || select_attributes[j].equals("M_PRICE") || select_attributes[j].equals("TIME_LENGTH") || select_attributes[j].equals("ALBUM_NAME")
+									 || select_attributes[j].equals("SINGER_NAME") || select_attributes[j].equals("F_NUMBER"))
+								attribute=2;
+							else if(select_attributes[j].equals("USER_ID") || select_attributes[j].equals("FAVORITE_NUMBER"))
+								attribute=3;
+							else if(select_attributes[j].equals("A_NAME") || select_attributes[j].equals("A_PRICE") || select_attributes[j].equals("F_NUMBER"))
+								attribute=4;
+							else if( select_attributes[j].equals("S_NAME") || select_attributes[j].equals("BIRTHDAY") || select_attributes[j].equals("NATION") || select_attributes[j].equals("F_NUMBER"))
+								attribute=5;
+							else if(select_attributes[j].equals("*"))
+								attribute=6;
+							
+					}	
+				}
+				else{
+
+					if(aggregate[1].substring(0,aggregate[1].length()-1).equals("ID") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")||aggregate[1].substring(0,aggregate[1].length()-1).equals("NICKNAME")
+							|| aggregate[1].substring(0,aggregate[1].length()-1).equals("M_NAME") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE") || aggregate[1].substring(0,aggregate[1].length()-1).equals("TIME_LENGTH") || aggregate[1].substring(0,aggregate[1].length()-1).equals("ALBUM_NAME")
+							 || aggregate[1].substring(0,aggregate[1].length()-1).equals("SINGER_NAME") || aggregate[1].substring(0,aggregate[1].length()-1).equals("F_NUMBER") || aggregate[1].substring(0,aggregate[1].length()-1).equals("*")
+							 || aggregate[1].substring(0,aggregate[1].length()-1).equals("USER_ID") || aggregate[1].substring(0,aggregate[1].length()-1).equals("FAVORITE_NUMBER")
+							 || aggregate[1].substring(0,aggregate[1].length()-1).equals("A_NAME") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("F_NUMBER")
+							 || aggregate[1].substring(0,aggregate[1].length()-1).equals("S_NAME") || aggregate[1].substring(0,aggregate[1].length()-1).equals("BIRTHDAY") || aggregate[1].substring(0,aggregate[1].length()-1).equals("NATION") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("F_NUMBER"))
+						;
+					else
+						throw new Exception();
+					
+					
+					if(aggregate[1].substring(0,aggregate[1].length()-1).equals("ID") || aggregate[1].substring(0,aggregate[1].length()-1).equals("PASSWORD")||aggregate[1].substring(0,aggregate[1].length()-1).equals("NICKNAME"))
+						attribute=1;
+					else if(aggregate[1].substring(0,aggregate[1].length()-1).equals("M_NAME") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("M_PRICE") || aggregate[1].substring(0,aggregate[1].length()-1).equals("TIME_LENGTH") || aggregate[1].substring(0,aggregate[1].length()-1).equals("ALBUM_NAME")
+							 || aggregate[1].equals("SINGER_NAME") || aggregate[1].equals("F_NUMBER"))
+						attribute=2;
+					else if(aggregate[1].substring(0,aggregate[1].length()-1).equals("USER_ID") || aggregate[1].substring(0,aggregate[1].length()-1).equals("FAVORITE_NUMBER"))
+						attribute=3;
+					else if(aggregate[1].substring(0,aggregate[1].length()-1).equals("A_NAME") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("A_PRICE") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("F_NUMBER"))
+						attribute=4;
+					else if( aggregate[1].substring(0,aggregate[1].length()-1).equals("S_NAME") ||aggregate[1].substring(0,aggregate[1].length()-1).equals("BIRTHDAY") || aggregate[1].substring(0,aggregate[1].length()-1).equals("NATION") || aggregate[1].substring(0,aggregate[1].length()-1).equals("F_NUMBER"))
+						attribute=5;
+					else if(aggregate[1].substring(0,aggregate[1].length()-1).equals("*"))
+						attribute=6;
+				}
+					
 			}
 			catch(Exception e){
 				System.out.println("No attributes in the database");
@@ -158,23 +196,29 @@ public class SQL {
 					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.user.ID.equals(sub)){							
-								UserPrint();
-								System.out.println();
+							if(table.user.ID.equals(sub)){			
+								if(special==1){
+									UserPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("PASSWORD") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.user.PASSWORD.equals(sub)){							
-								UserPrint();
-								System.out.println();
+							if(table.user.PASSWORD.equals(sub)){
+								if(special==1){
+									UserPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("NICKNAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.user.NICKNAME.equals(sub)){							
-								UserPrint();
-								System.out.println();
+							if(table.user.NICKNAME.equals(sub)){
+								if(special==1){
+									UserPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(table.user.next!=null)
@@ -186,44 +230,56 @@ public class SQL {
 					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("M_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.M_NAME.equals(sub)){							
-								MusicPrint();
-								System.out.println();
+							if(table.music.M_NAME.equals(sub)){	
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("M_PRICE") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.M_PRICE.equals(sub)){							
-								MusicPrint();
-								System.out.println();
+							if(table.music.M_PRICE.equals(sub)){
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("TIME_LENGTH") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.TIME_LENGTH.equals(sub)){							
-								MusicPrint();
-								System.out.println();
+							if(table.music.TIME_LENGTH.equals(sub)){
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("ALBUM_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.ALBUM_NAME.equals(sub)){		
-								MusicPrint();
-								System.out.println();
+							if(table.music.ALBUM_NAME.equals(sub)){	
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("SINGER_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.SINGER_NAME.equals(sub)){							
-								MusicPrint();
-								System.out.println();
+							if(table.music.SINGER_NAME.equals(sub)){
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.music.F_NUMBER.equals(sub)){							
-								MusicPrint();
-								System.out.println();
+							if(table.music.F_NUMBER.equals(sub)){
+								if(special==1){
+									MusicPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(table.music.next!=null)
@@ -234,16 +290,20 @@ public class SQL {
 					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("USER_ID") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.favorite.USER_ID.equals(sub)){							
-								FavoritePrint();
-								System.out.println();
+							if(table.favorite.USER_ID.equals(sub)){	
+								if(special==1){
+									FavoritePrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("FAVORITE_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.favorite.FAVORITE_NUMBER.equals(sub)){							
-								FavoritePrint();
-								System.out.println();
+							if(table.favorite.FAVORITE_NUMBER.equals(sub)){	
+								if(special==1){
+									FavoritePrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(table.favorite.next!=null)
@@ -254,23 +314,29 @@ public class SQL {
 					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("A_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.album.A_NAME.equals(sub)){							
-								AlbumPrint();
-								System.out.println();
+							if(table.album.A_NAME.equals(sub)){
+								if(special==1){
+									AlbumPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("A_PRICE") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.album.A_PRICE.equals(sub)){							
-								AlbumPrint();
-								System.out.println();
+							if(table.album.A_PRICE.equals(sub)){
+								if(special==1){
+									AlbumPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.album.F_NUMBER.equals(sub)){							
-								AlbumPrint();
-								System.out.println();
+							if(table.album.F_NUMBER.equals(sub)){	
+								if(special==1){
+									AlbumPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(table.album.next!=null)
@@ -281,30 +347,38 @@ public class SQL {
 					for(int j=0;j<table.Table_number;j++){
 						if(condition[0].equals("S_NAME") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.singer.S_NAME.equals(sub)){							
-								SingerPrint();
-								System.out.println();
+							if(table.singer.S_NAME.equals(sub)){
+								if(special==1){
+									SingerPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("BIRTHDAY") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.singer.BIRTHDAY.equals(sub)){							
-								SingerPrint();
-								System.out.println();
+							if(table.singer.BIRTHDAY.equals(sub)){	
+								if(special==1){
+									SingerPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("NATION") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.singer.NATION.equals(sub)){							
-								SingerPrint();
-								System.out.println();
+							if(table.singer.NATION.equals(sub)){	
+								if(special==1){
+									SingerPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(condition[0].equals("F_NUMBER") && condition[1].charAt(0)=='\"'){
 							sub=condition[1].substring(1, condition[1].length()-1);
-							if(table.singer.F_NUMBER.equals(sub)){							
-								SingerPrint();
-								System.out.println();
+							if(table.singer.F_NUMBER.equals(sub)){
+								if(special==1){
+									SingerPrint();
+									System.out.println();
+								}
 							}	
 						}
 						if(table.singer.next!=null)
