@@ -18,6 +18,7 @@ public class SQL {
 	private double number;
 	private double sum;
 	private double avg;
+	private boolean count;
 	Table_node table=new Table_node();
 	
 	public void CreateTable(){
@@ -31,6 +32,7 @@ public class SQL {
 		number=0;
 		avg=0.0;
 		special=true;
+		count=true;
 		sum=0.0;
 		conditions_number=1;
 		attribute=0;
@@ -41,16 +43,21 @@ public class SQL {
 			System.out.println("Enter:");
 			select=input.nextLine();
 			from=input.nextLine();
-			where=input.nextLine();
-			
+						
 			select_ary=select.split(" ");
 			from_ary=from.split(" ");
-			where_ary=where.split(" ");
-		
+			aggregate=select_ary[1].split("\\(");
+			if(aggregate[0].toUpperCase().equals("COUNT"))
+				count=false;
+			
+			if(count){
+				where=input.nextLine();
+				where_ary=where.split(" ");
+			}
 			//split attributes , entity
 	
 			 select_attributes=select_ary[1].split(",");
-			 aggregate=select_ary[1].split("\\(");
+			 
 			 from_entity=from_ary[1].split(",");
 			 
 			//check whether user enters correct commend
@@ -61,9 +68,10 @@ public class SQL {
 				throw new Exception();
 			if(!from_ary[0].toUpperCase().equals("FROM"))
 				throw new Exception();
-			if(!where_ary[0].toUpperCase().equals("WHERE"))
-				throw new Exception();
-			
+			if(count){
+				if(!where_ary[0].toUpperCase().equals("WHERE"))
+					throw new Exception();
+			}
 			try{
 				if(special){
 					for(int j=0;j<select_attributes.length;j++){
@@ -187,15 +195,15 @@ public class SQL {
 		
 		table.user=table.user.next;
 	*/
-		for(int i=1;i<where_ary.length;i++){
-			if(where_ary[i].toUpperCase().equals("AND"))
-				conditions_number++;
+		if(count){
+			for(int i=1;i<where_ary.length;i++){
+				if(where_ary[i].toUpperCase().equals("AND"))
+					conditions_number++;
+			}
+				
+			for(int i=1;i<where_ary.length;i++){
+				condition=where_ary[i].split("=");
 		}
-		
-		
-		for(int i=1;i<where_ary.length;i++){
-			condition=where_ary[i].split("=");
-			
 			for(int K=0;K<entity.size();K++){
 				if(entity.get(K).equals(1)){
 					for(int j=0;j<table.Table_number;j++){
@@ -530,6 +538,8 @@ public class SQL {
 			System.out.println(sum);
 		else if(aggregate[0].toUpperCase().equals("AVG"))	
 			System.out.println(avg/number);
+		else if(aggregate[0].toUpperCase().equals("COUNT"))
+			System.out.println(table.Table_number);
 		TableInitial();
 	}
 	
